@@ -95,9 +95,7 @@ async function saveAssistant() {
             clientId
         );
     }
-
-    console.log("Client ID:", clientId);
-
+    
     const prompt =
         document.getElementById("PromptDescription").value.trim();
     const language =
@@ -129,9 +127,6 @@ async function saveAssistant() {
         prompt,
         language
     };
-
-
-    console.log(assistantData);
 
     try {
         const response = await fetch(
@@ -166,9 +161,6 @@ async function saveAssistant() {
             SHIFRA_API_KEY
         );
         document.getElementById("ApiKey").value = SHIFRA_API_KEY;
-
-        console.log("Generated API Key:", SHIFRA_API_KEY);
-
 
         // Generated API code
         generateApiCode(SHIFRA_API_KEY,
