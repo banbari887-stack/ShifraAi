@@ -1,0 +1,51 @@
+<nav class="w-full border-b border-orange-100 bg-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2.5">
+            <img src="/assets/logo.png" alt="Logo" class="h-9 w-auto object-contain">
+            <h1 class="text-xl font-bold leading-none text-gray-700">
+                Shifra
+                <span class="bg-gradient-to-r from-purple-500 to-emerald-500 bg-clip-text text-transparent">
+                    Ai
+                </span>
+            </h1>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden items-center gap-3 md:flex">
+
+            <a href="/builder"
+                class="rounded-xl bg-gradient-to-r from-emerald-500 to-purple-500 px-4 py-2 text-sm font-medium text-white shadow-md transition-all hover:scale-[1.02]">
+                Builder
+            </a>
+
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuButton" class="text-gray-600 transition-colors hover:text-purple-500 md:hidden">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden px-4 pb-4 md:hidden">
+
+        <div class="rounded-2xl border border-orange-100 bg-white p-4 shadow-lg">
+
+
+
+            <!-- Mobile buttons -->
+            <div class="mt-4 flex flex-col gap-3">
+                <a href="/builder"
+                    class="w-full rounded-xl bg-gradient-to-r from-emerald-500 to-purple-500 py-2.5 text-center text-sm font-medium text-white">
+                    Builder
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>

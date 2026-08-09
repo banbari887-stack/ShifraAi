@@ -1,0 +1,27 @@
+{
+  "name": "ai-code-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "build": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@google/genai": "^2.16.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
+    "mongoose": "^9.9.1",
+    "nodemon": "^3.1.14"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^3.4.19"
+  }
+}
