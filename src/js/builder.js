@@ -33,7 +33,7 @@ app.get("/", async (req, res) => {
 
     try {
         const response = await fetch(
-            "http://localhost:3000/api/generate",
+            "https://shifra-ai-seven.vercel.app/api/generate",
             {
                 method: "POST",
 
