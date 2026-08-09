@@ -15,7 +15,7 @@ const GenrateAi = async (language, prompt) => {
                 "Content-Type": "application/json",
 
                 "HTTP-Referer":
-                    "http://localhost:3000",
+                    "https://shifra-ai-seven.vercel.app",
 
                 "X-Title":
                     "Shifra AI"
