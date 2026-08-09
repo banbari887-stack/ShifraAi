@@ -56,7 +56,7 @@ app.get("/js/home.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "home.js")
+        path.join(__dirname, "src", "js", "home.js")
     );
 });
 
@@ -64,7 +64,7 @@ app.get("/js/builder.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "builder.js")
+        path.join(__dirname, "src", "js", "builder.js")
     );
 });
 
