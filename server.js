@@ -72,7 +72,7 @@ app.get("/js/navbar.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "navbar.js")
+        path.join(__dirname, "src", "js", "navbar.js")
     );
 });
 
@@ -80,7 +80,7 @@ app.get("/js/fetch.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "fetch.js")
+        path.join(__dirname, "src", "js", "fetch.js")
     );
 });
 
