@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import dns from "dns";
 import apiKeyRoutes from "./src/routes/apiKey.routes.js";
-import cors from 'cors';
+import cors from "cors";
 
 dotenv.config();
 
@@ -15,21 +15,22 @@ dns.setServers([
     "1.1.1.1"
 ]);
 
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("Connected"))
-    .catch(err => console.log(err));
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const app = express();
 
 app.use(express.json());
+
 app.use(cors({
-    origin: 'http://127.0.0.1:5500',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+// Static files
 app.use(express.static(path.join(__dirname, "public")));
+
 app.use(
     "/components",
     express.static(
@@ -37,27 +38,45 @@ app.use(
     )
 );
 
+// Pages
 app.get("/", (req, res) => {
-    res.sendFile("./templates/page/Home/index.html", { root: __dirname })
-}).get("/builder", (req, res) => {
-    res.sendFile("./templates/page/Builder/index.html", { root: __dirname })
-}).get("/js/home.js", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "templates", "page", "Home", "index.html")
+    );
+});
+
+app.get("/builder", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "templates", "page", "Builder", "index.html")
+    );
+});
+
+// JS files
+app.get("/js/home.js", (req, res) => {
     res.type("application/javascript");
+
     res.sendFile(
         path.join(__dirname, "src", "Js", "home.js")
     );
-}).get("/js/builder.js", (req, res) => {
+});
+
+app.get("/js/builder.js", (req, res) => {
     res.type("application/javascript");
+
     res.sendFile(
         path.join(__dirname, "src", "Js", "builder.js")
     );
-}).get("/js/navbar.js", (req, res) => {
+});
+
+app.get("/js/navbar.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
         path.join(__dirname, "src", "Js", "navbar.js")
     );
-}).get("/js/fetch.js", (req, res) => {
+});
+
+app.get("/js/fetch.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
@@ -65,11 +84,25 @@ app.get("/", (req, res) => {
     );
 });
 
+// API routes
 app.use("/api", generateRoutes);
 app.use("/api/generate", apiKeyRoutes);
 
-const PORT = process.env.PORT || 3000;
+// MongoDB
+if (process.env.MONGODB_URI) {
+    mongoose
+        .connect(process.env.MONGODB_URI)
+        .then(() => console.log("MongoDB Connected"))
+        .catch((err) => console.error("MongoDB Error:", err));
+}
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Local development only
+if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+export default app;
