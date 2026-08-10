@@ -98,6 +98,7 @@ app.use(async (req, res, next) => {
             error: "Database unavailable"
         });
     }
+});
 
 // API routes
 app.use("/api", generateRoutes);
@@ -119,3 +120,5 @@ if (process.env.NODE_ENV !== "production") {
         console.log(`Server running on port ${PORT}`);
     });
 }
+
+export default app;
