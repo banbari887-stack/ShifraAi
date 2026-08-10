@@ -66,7 +66,7 @@ app.get("/js/home.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "home.js")
+        path.join(__dirname, "src", "js", "home.js")
     );
 });
 
@@ -74,7 +74,7 @@ app.get("/js/builder.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "builder.js")
+        path.join(__dirname, "src", "js", "builder.js")
     );
 });
 
@@ -82,7 +82,7 @@ app.get("/js/navbar.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "navbar.js")
+        path.join(__dirname, "src", "js", "navbar.js")
     );
 });
 
@@ -90,7 +90,7 @@ app.get("/js/fetch.js", (req, res) => {
     res.type("application/javascript");
 
     res.sendFile(
-        path.join(__dirname, "src", "Js", "fetch.js")
+        path.join(__dirname, "src", "js", "fetch.js")
     );
 });
 
