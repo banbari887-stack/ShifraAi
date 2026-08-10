@@ -104,14 +104,6 @@ app.use(async (req, res, next) => {
 app.use("/api", generateRoutes);
 app.use("/api/generate", apiKeyRoutes);
 
-// MongoDB
-if (process.env.MONGODB_URI) {
-    mongoose
-        .connect(process.env.MONGODB_URI)
-        .then(() => console.log("MongoDB Connected"))
-        .catch((err) => console.error("MongoDB Error:", err));
-}
-
 // Local development only
 if (process.env.NODE_ENV !== "production") {
     const PORT = process.env.PORT || 3000;
