@@ -1,13 +1,20 @@
 import express from "express";
 import dotenv from "dotenv";
 import generateRoutes from "./src/routes/generate.routes.js";
-import apiKeyRoutes from "./src/routes/apiKey.routes.js";
-import connectDB from "./src/config/db.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import mongoose from "mongoose";
+import connectDB from "./src/config/db.js";
+import dns from "dns";
+import apiKeyRoutes from "./src/routes/apiKey.routes.js";
 import cors from "cors";
 
 dotenv.config();
+
+dns.setServers([
+    "8.8.8.8",
+    "1.1.1.1"
+]);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,12 +29,8 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// Static
-app.use(
-    express.static(
-        path.join(__dirname, "public")
-    )
-);
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
     "/components",
@@ -39,29 +42,17 @@ app.use(
 // Pages
 app.get("/", (req, res) => {
     res.sendFile(
-        path.join(
-            __dirname,
-            "templates",
-            "page",
-            "Home",
-            "index.html"
-        )
+        path.join(__dirname, "templates", "page", "Home", "index.html")
     );
 });
 
 app.get("/builder", (req, res) => {
     res.sendFile(
-        path.join(
-            __dirname,
-            "templates",
-            "page",
-            "Builder",
-            "index.html"
-        )
+        path.join(__dirname, "templates", "page", "Builder", "index.html")
     );
 });
 
-// JS
+// JS files
 app.get("/js/home.js", (req, res) => {
     res.type("application/javascript");
 
@@ -107,20 +98,25 @@ app.use(async (req, res, next) => {
             error: "Database unavailable"
         });
     }
-// API
+
+// API routes
 app.use("/api", generateRoutes);
 app.use("/api/generate", apiKeyRoutes);
 
-});
+// MongoDB
+if (process.env.MONGODB_URI) {
+    mongoose
+        .connect(process.env.MONGODB_URI)
+        .then(() => console.log("MongoDB Connected"))
+        .catch((err) => console.error("MongoDB Error:", err));
+}
 
-// Local development
+// Local development only
 if (process.env.NODE_ENV !== "production") {
     const PORT = process.env.PORT || 3000;
 
     app.listen(PORT, () => {
-        console.log(
-            `Server running on port ${PORT}`
-        );
+        console.log(`Server running on port ${PORT}`);
     });
 }
 
