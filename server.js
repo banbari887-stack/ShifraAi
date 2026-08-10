@@ -94,10 +94,6 @@ app.get("/js/fetch.js", (req, res) => {
     );
 });
 
-// API
-app.use("/api", generateRoutes);
-app.use("/api/generate", apiKeyRoutes);
-
 // MongoDB middleware
 app.use(async (req, res, next) => {
     try {
@@ -111,6 +107,10 @@ app.use(async (req, res, next) => {
             error: "Database unavailable"
         });
     }
+// API
+app.use("/api", generateRoutes);
+app.use("/api/generate", apiKeyRoutes);
+
 });
 
 // Local development
